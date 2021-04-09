@@ -1,6 +1,12 @@
 package com.hibernate.DemoHibernate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name="student")
 public class Student {
+	
+	@Id
 	private int id;
 	private String name;
 	private String course;
