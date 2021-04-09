@@ -25,5 +25,9 @@ public class App {
 		Transaction tx = session.beginTransaction();
 		session.save(cvqtko);
 		tx.commit();
+		
+		cvqtko = (Student)session.get(Student.class,1);
+		
+		System.out.println(cvqtko);
 	}
 }
