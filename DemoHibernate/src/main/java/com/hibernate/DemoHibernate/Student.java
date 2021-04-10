@@ -2,6 +2,7 @@ package com.hibernate.DemoHibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity(name="student")
 public class Student {
@@ -10,6 +11,17 @@ public class Student {
 	private int id;
 	private String name;
 	private String course;
+	
+	@OneToOne
+	private Laptop laptop;
+
+	public Laptop getLaptop() {
+		return laptop;
+	}
+
+	public void setLaptop(Laptop laptop) {
+		this.laptop = laptop;
+	}
 
 	public int getId() {
 		return id;
