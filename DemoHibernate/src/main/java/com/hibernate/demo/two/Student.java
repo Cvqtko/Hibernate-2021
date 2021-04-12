@@ -1,26 +1,21 @@
-package com.hibernate.DemoHibernate;
+package com.hibernate.demo.two;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-@Entity(name="student")
+@Entity
+@Table
 public class Student {
-	
 	@Id
 	private int id;
 	private String name;
 	private String course;
-	
-	@OneToOne 
-	private Laptop laptop;
 
-	public Laptop getLaptop() {
-		return laptop;
-	}
-
-	public void setLaptop(Laptop laptop) {
-		this.laptop = laptop;
+	public Student(int id, String name, String course) {
+		this.id = id;
+		this.name = name;
+		this.course = course;
 	}
 
 	public int getId() {
@@ -51,5 +46,5 @@ public class Student {
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", course=" + course + "]";
 	}
-	
+
 }
