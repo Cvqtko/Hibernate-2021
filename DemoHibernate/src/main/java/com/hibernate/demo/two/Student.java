@@ -1,6 +1,8 @@
 package com.hibernate.demo.two;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -8,9 +10,19 @@ import javax.persistence.Table;
 @Table
 public class Student {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private String course;
+
+	public Student() {
+
+	}
+
+	public Student(String name, String course) {
+		this.name = name;
+		this.course = course;
+	}
 
 	public Student(int id, String name, String course) {
 		this.id = id;

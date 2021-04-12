@@ -6,8 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateMain {
-
+public class HibernateRetrieveARecord {
 	public static void main(String[] args) {
 
 		Configuration configuration = new Configuration().configure();
@@ -20,16 +19,15 @@ public class HibernateMain {
 
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
-		// Student student = new Student(1, "Tsvyatko", "Eclipse");
-		// Student student2 = new Student(2, "Georgi", "Eclipse");
-		Student student = new Student("Tsvyatko", "Eclipse");
-		Student student2 = new Student("Georgi", "Eclipse");
-		Student student3 = new Student("Vasil", "Eclipse");
-		session.save(student);
-		session.save(student2);
-		session.save(student3);
+
+		Student student = session.get(Student.class, 1);
+		
+		System.out.println(student);
+		
 		transaction.commit();
 		session.close();
 	}
 
 }
+
+

@@ -1,13 +1,16 @@
 package com.hibernate.demo.two;
 
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateMain {
-
+public class SqlExample {
 	public static void main(String[] args) {
 
 		Configuration configuration = new Configuration().configure();
@@ -20,14 +23,17 @@ public class HibernateMain {
 
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
-		// Student student = new Student(1, "Tsvyatko", "Eclipse");
-		// Student student2 = new Student(2, "Georgi", "Eclipse");
-		Student student = new Student("Tsvyatko", "Eclipse");
-		Student student2 = new Student("Georgi", "Eclipse");
-		Student student3 = new Student("Vasil", "Eclipse");
-		session.save(student);
-		session.save(student2);
-		session.save(student3);
+		SQLQuery query = session.createSQLQuery("SELECT id, name, course FROM student");
+
+		List<Object[]> students = query.list();
+
+		for (Object[] student : students) {
+			Student s = new Student();
+			s.setId((Integer)student[0]);
+			s.setName(student[1].toString());
+			s.setCourse(student[2].toString());
+			System.out.println(s);
+		}
 		transaction.commit();
 		session.close();
 	}

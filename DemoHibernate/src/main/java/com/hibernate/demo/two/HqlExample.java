@@ -1,13 +1,15 @@
 package com.hibernate.demo.two;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateMain {
-
+public class HqlExample {
 	public static void main(String[] args) {
 
 		Configuration configuration = new Configuration().configure();
@@ -20,14 +22,14 @@ public class HibernateMain {
 
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
-		// Student student = new Student(1, "Tsvyatko", "Eclipse");
-		// Student student2 = new Student(2, "Georgi", "Eclipse");
-		Student student = new Student("Tsvyatko", "Eclipse");
-		Student student2 = new Student("Georgi", "Eclipse");
-		Student student3 = new Student("Vasil", "Eclipse");
-		session.save(student);
-		session.save(student2);
-		session.save(student3);
+
+		Query query = session.createQuery("from Student where course=:course");
+		query.setString("course", "Eclipse");
+		List<Student> students = query.list();
+
+		for (Student student : students)
+			System.out.println(student);
+
 		transaction.commit();
 		session.close();
 	}
